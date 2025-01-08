@@ -75,3 +75,6 @@ logs
 .cache
 .eslintcache
 .stylelintcache
+
+# Contentlayer
+.contentlayer
