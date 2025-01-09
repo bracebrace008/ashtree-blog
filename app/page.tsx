@@ -4,8 +4,6 @@ import { allPosts } from 'contentlayer/generated'
 export default function Home() {
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-4xl font-bold mb-8">欢迎来到我的博客</h1>
-
             <div className="grid gap-6">
                 {allPosts.map((post) => (
                     <article key={post.slug} className="border rounded-lg p-6 hover:shadow-lg transition">
@@ -25,4 +23,4 @@ export default function Home() {
             </div>
         </div>
     )
-} 
+}
