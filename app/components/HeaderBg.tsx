@@ -1,24 +1,37 @@
-export default function HeaderBg() {
-  const technologies = ["Mysql", "JavaScript", "SpringBoot", "React", "Vue"]
+import Link from "next/link";
 
+const categories = [
+  { name: "Mysql", href: "/category/mysql" },
+  { name: "JavaScript", href: "/category/javascript" },
+  { name: "SpringBoot", href: "/category/springboot" },
+  { name: "React", href: "/category/react" },
+  { name: "Vue", href: "/category/vue" },
+];
+
+const HeaderBg = () => {
   return (
-    <div className="flex flex-col items-center gap-[20px] bg-[#EEEEEE] pb-[21px] pt-[12px]">
-      <h1 className="font-inter whitespace-pre-line text-center text-[24px] font-extrabold leading-[32px] text-black">
+    <div className="flex flex-col items-center bg-[#EEEEEE] py-3 pb-[21px]">
+      <h2 className="whitespace-pre-line text-center font-inter text-2xl font-extrabold leading-[32px]">
         {"The Full-Stack\nDeveloper"}
-      </h1>
-      <div className="flex flex-wrap items-center justify-center gap-[5px] py-[27px] px-[60px]">
-        {technologies.map((tech, index) => (
+      </h2>
+      <div className="flex flex-wrap items-center justify-center gap-[5px] py-[27px] px-[50px]">
+        {categories.map((category, index) => (
           <>
-            <span
-              key={tech}
-              className="font-inter text-center text-[16px] font-light leading-[12px] text-[#4A4A4A] underline"
+            <Link
+              key={category.name}
+              href={category.href}
+              className="font-inter text-base font-light text-[#4A4A4A] underline"
             >
-              {tech}
-            </span>
-            {index < technologies.length - 1 && <div className="h-[16px] w-[1px] bg-[#A5A5A5]" />}
+              {category.name}
+            </Link>
+            {index < categories.length - 1 && (
+              <span className="h-4 w-px bg-[#A5A5A5]" />
+            )}
           </>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default HeaderBg;

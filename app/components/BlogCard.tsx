@@ -1,34 +1,34 @@
+import Link from "next/link";
+
 interface BlogCardProps {
-  title: string
-  description: string
-  date: string
-  categories: string[]
+  title: string;
+  subtitle: string;
+  date: string;
+  categories: string[];
+  href: string;
 }
 
-export default function PresentationCard({ title, description, date, categories }: BlogCardProps) {
+const BlogCard = ({ title, subtitle, date, categories, href }: BlogCardProps) => {
   return (
-    <div className="flex flex-col gap-[10px] py-[4px]">
-      <div className="font-inter text-left text-[24px] font-semibold leading-[32px] text-[#000000]">
-        {title}
-      </div>
-      <div className="font-inter text-left text-[16px] font-normal leading-[24px] text-[#667085]">
-        {description}
-      </div>
-      <div className="font-inter text-left text-[14px] font-semibold leading-[20px] text-[#a3a3a3]">
-        {date}
-      </div>
-      <div className="flex h-[34px] w-[280px] items-center gap-[8px]">
+    <Link
+      href={href}
+      className="flex h-[217px] w-full flex-col gap-2.5 px-1 py-1"
+    >
+      <h3 className="font-inter text-2xl font-semibold leading-8">{title}</h3>
+      <p className="text-base text-[#666F85]">{subtitle}</p>
+      <time className="text-sm font-semibold text-[#A3A3A3]">{date}</time>
+      <div className="flex gap-2">
         {categories.map((category) => (
-          <div
+          <span
             key={category}
-            className="flex h-[24px] w-[67px] items-center justify-center p-[10px]"
+            className="rounded-2xl bg-[#EAEAEA] px-2.5 py-0.5 text-sm font-medium text-[#4D4D4D]"
           >
-            <div className="font-inter text-center text-[14px] font-medium leading-[20px] text-[#4d4d4d]">
-              {category}
-            </div>
-          </div>
+            {category}
+          </span>
         ))}
       </div>
-    </div>
-  )
-}
+    </Link>
+  );
+};
+
+export default BlogCard;
