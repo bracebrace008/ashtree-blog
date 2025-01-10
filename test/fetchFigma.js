@@ -16,10 +16,10 @@ async function fetchFigmaFile(nodeId) {
       },
     })
     const figmaContent = response.data["nodes"][nodeId].document;
-    fs.writeFileSync("figma_content.json", JSON.stringify(figmaContent, null, 2))
+    fs.writeFileSync("./dist/figma_content.json", JSON.stringify(figmaContent, null, 2))
 
     const tailwindContent = await figmaToTailwind(figmaContent)
-    fs.writeFileSync("tailwind.html", tailwindContent)
+    fs.writeFileSync("./dist/tailwind.html", tailwindContent)
 
     console.log("Figma content and Tailwind content have been saved.")
   } catch (error) {
