@@ -1,0 +1,1 @@
+生成的.tsx, .css后缀的文件都用prettier格式化
