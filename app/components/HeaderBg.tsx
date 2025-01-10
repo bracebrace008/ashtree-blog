@@ -6,7 +6,7 @@ export default function HeaderBg() {
       <h1 className="font-inter whitespace-pre-line text-center text-[24px] font-extrabold leading-[32px] text-black">
         {"The Full-Stack\nDeveloper"}
       </h1>
-      <div className="flex flex-wrap items-center justify-center gap-[5px] py-[27px] px-[40px]">
+      <div className="flex flex-wrap items-center justify-center gap-[5px] py-[27px] px-[60px]">
         {technologies.map((tech, index) => (
           <>
             <span

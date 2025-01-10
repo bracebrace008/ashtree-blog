@@ -1,0 +1,16 @@
+{
+  "name": "ashtree-blog-test",
+  "version": "1.0.0",
+  "description": "Test scripts for Ashtree Blog",
+  "main": "fetchFigma.js",
+  "scripts": {
+    "test": "node fetchFigma.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "figma-to-smart-code": "^1.0.0"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}

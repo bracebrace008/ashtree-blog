@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div>
       <HeaderBg />
-      <div className="grid gap-6">
+      <div className="grid w-full gap-6 px-[20px]">
         {allPosts.map((post) => (
           <FigmaCard
             key={post.slug}
