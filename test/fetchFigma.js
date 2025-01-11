@@ -3,7 +3,8 @@ const fs = require("fs")
 const { figmaToTailwind } = require("figma-to-smart-code")
 
 const FIGMA_API_URL = "https://api.figma.com/v1/files/"
-const FILE_KEY = "MbUzcnUAQ8QER5qFcWlcjQ"
+// const FILE_KEY = "MbUzcnUAQ8QER5qFcWlcjQ"
+const FILE_KEY="SVWHGks9h0jP3YvTWwYInP"
 const ACCESS_TOKEN =
   process.env.FIGMA_ACCESS_TOKEN
 console.log(ACCESS_TOKEN)
@@ -27,4 +28,4 @@ async function fetchFigmaFile(nodeId) {
   }
 }
 
-fetchFigmaFile("1:2")
+fetchFigmaFile("12:11")
