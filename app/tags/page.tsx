@@ -3,9 +3,9 @@
 import { getAllTags, getPostsByTags } from "@/lib/tags";
 import BlogCard from "@/app/components/BlogCard";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 
-export default function TagsPage() {
+function TagsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialTags = searchParams.get("tag")?.split(",") || [];
@@ -70,5 +70,13 @@ export default function TagsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function TagsPage() {
+  return (
+    <Suspense>
+      <TagsPageContent />
+    </Suspense>
   );
 }
