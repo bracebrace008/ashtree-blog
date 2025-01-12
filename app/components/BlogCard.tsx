@@ -20,7 +20,7 @@ const BlogCard = ({ title, subtitle, date, tags, href }: BlogCardProps) => {
         {tags.map((tag) => (
           <Link
             key={tag}
-            href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
+            href={`/tags?tag=${tag}`}
             className="rounded-2xl bg-[#EAEAEA] px-2.5 py-0.5 text-sm font-medium text-[#4D4D4D] hover:bg-gray-200"
           >
             {tag}

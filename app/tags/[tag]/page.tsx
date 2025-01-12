@@ -1,27 +1,27 @@
-import { allPosts } from "contentlayer/generated"
-import BlogCard from "@/app/components/BlogCard"
-import { getAllTags, getPostsByTag } from "@/lib/tags"
-import { notFound } from "next/navigation"
+import { allPosts } from "contentlayer/generated";
+import BlogCard from "@/app/components/BlogCard";
+import { getAllTags, getPostsByTag } from "@/lib/tags";
+import { notFound } from "next/navigation";
 
 interface TagPageProps {
   params: {
-    tag: string
-  }
+    tag: string;
+  };
 }
 
 export function generateStaticParams() {
-  const tags = getAllTags()
+  const tags = getAllTags();
   return tags.map((tag) => ({
-    tag: encodeURIComponent(tag.toLowerCase()),
-  }))
+    tag: tag,
+  }));
 }
 
 export default function TagPage({ params }: TagPageProps) {
-  const tag = decodeURIComponent(params.tag)
-  const posts = getPostsByTag(tag)
+  const tag = params.tag;
+  const posts = getPostsByTag(tag);
 
   if (posts.length === 0) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -42,5 +42,5 @@ export default function TagPage({ params }: TagPageProps) {
         </div>
       </div>
     </div>
-  )
-} 
+  );
+}
