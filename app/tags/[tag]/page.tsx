@@ -36,7 +36,7 @@ export default function TagPage({ params }: TagPageProps) {
               title={post.title}
               subtitle={post.description}
               date={new Date(post.date).toLocaleDateString("zh-CN")}
-              categories={post.tags || []}
+              tags={post.tags || []}
             />
           ))}
         </div>
