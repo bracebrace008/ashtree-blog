@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface SidebarProps {
@@ -24,10 +25,14 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           "lg:translate-x-0" // 在大屏幕上始终显示
         )}
       >
-        <div className="flex h-[52px] items-center px-5">
-          <Link href="/" className="text-lg font-bold text-[#1a1a1a]">
-            Brace's Blog
-          </Link>
+        <div className="flex h-[52px] items-center justify-end px-3">
+          <button
+            onClick={onClose}
+            className="rounded-lg p-2 hover:bg-gray-100 lg:hidden"
+            aria-label="Close sidebar"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
         
         <nav className="flex flex-col gap-1 p-3">
