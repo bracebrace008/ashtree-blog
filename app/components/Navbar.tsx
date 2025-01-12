@@ -7,7 +7,7 @@ interface NavbarProps {
 
 export default function Navbar({ onMenuClick }: NavbarProps) {
   return (
-    <header className="fixed top-0 z-40 w-full border-b bg-white/80 backdrop-blur-sm">
+    <header className="fixed top-0 z-40 w-full bg-[#EEEEEE]/80">
       <div className="flex h-[52px] items-center justify-between px-4">
         <Link href="/" className="text-lg font-bold text-[#1a1a1a]">
           Brace's Blog

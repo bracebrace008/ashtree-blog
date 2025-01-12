@@ -1,6 +1,6 @@
 import { allPosts } from "contentlayer/generated"
 import BlogCard from "./components/BlogCard"
-import HeaderBg from "./components/HeaderBg"
+import BlogHero from "./components/BlogHero"
 
 export default function Home() {
   const posts = allPosts.sort((a, b) => {
@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      <HeaderBg />
+      <BlogHero />
       <div className="container mx-auto px-4 py-8">
         <div className="grid gap-6">
           {posts.map((post) => (
