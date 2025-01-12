@@ -8,20 +8,17 @@ import { allPosts } from "contentlayer/generated";
 export default function TagsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const activeTag = searchParams.get("tag") || "all";
+  const activeTag = searchParams.get("tag");
 
-  const allTags = [
-    { name: "全部", value: "all" },
-    ...getAllTags().map((tag) => ({
-      name: tag,
-      value: tag,
-    })),
-  ];
+  const tags = getAllTags().map((tag) => ({
+    name: tag,
+    value: tag,
+  }));
 
-  const posts = activeTag != "all" ? getPostsByTag(activeTag) : allPosts;
+  const posts = activeTag ? getPostsByTag(activeTag) : allPosts;
 
   const handleTagClick = (value: string) => {
-    if (value === "all") {
+    if (value === activeTag) {
       router.push("/tags");
     } else {
       router.push(`/tags?tag=${value}`);
@@ -35,7 +32,7 @@ export default function TagsPage() {
 
         {/* 标签列表 */}
         <div className="mb-8 flex flex-wrap gap-4">
-          {allTags.map((tag) => (
+          {tags.map((tag) => (
             <div
               key={tag.name}
               onClick={() => handleTagClick(tag.value)}
