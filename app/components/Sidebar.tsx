@@ -7,10 +7,21 @@ interface SidebarProps {
   onClose: () => void
 }
 
+const navigationItems = [
+  { name: "首页", href: "/" },
+  { name: "文章", href: "/posts" },
+  { name: "关于", href: "/about" },
+]
+
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+  const handleLinkClick = () => {
+    if (window.innerWidth < 1024) {
+      onClose()
+    }
+  }
+
   return (
     <>
-      {/* 遮罩层 */}
       {isOpen && (
         <div
           className="fixed inset-0 z-30 bg-black/20 lg:hidden"
@@ -22,7 +33,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         className={cn(
           "fixed left-0 top-0 z-40 h-screen w-[240px] transform border-r bg-white transition-transform duration-200 ease-in-out",
           isOpen ? "translate-x-0" : "-translate-x-full",
-          "lg:translate-x-0" // 在大屏幕上始终显示
+          "lg:translate-x-0"
         )}
       >
         <div className="flex h-[52px] items-center justify-end px-3">
@@ -36,24 +47,16 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         </div>
         
         <nav className="flex flex-col gap-1 p-3">
-          <Link
-            href="/"
-            className="flex h-9 items-center rounded-lg px-3 text-sm text-gray-600 hover:bg-gray-100"
-          >
-            首页
-          </Link>
-          <Link
-            href="/posts"
-            className="flex h-9 items-center rounded-lg px-3 text-sm text-gray-600 hover:bg-gray-100"
-          >
-            文章
-          </Link>
-          <Link
-            href="/about"
-            className="flex h-9 items-center rounded-lg px-3 text-sm text-gray-600 hover:bg-gray-100"
-          >
-            关于
-          </Link>
+          {navigationItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={handleLinkClick}
+              className="flex h-9 items-center rounded-lg px-3 text-sm text-gray-600 hover:bg-gray-100"
+            >
+              {item.name}
+            </Link>
+          ))}
         </nav>
       </aside>
     </>
