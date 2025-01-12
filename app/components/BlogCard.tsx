@@ -10,24 +10,24 @@ interface BlogCardProps {
 
 const BlogCard = ({ title, subtitle, date, categories, href }: BlogCardProps) => {
   return (
-    <Link
-      href={href}
-      className="flex h-[217px] w-full flex-col gap-2.5 px-1 py-1"
-    >
-      <h3 className="font-inter text-2xl font-semibold leading-8">{title}</h3>
-      <p className="text-base text-[#666F85]">{subtitle}</p>
-      <time className="text-sm font-semibold text-[#A3A3A3]">{date}</time>
+    <div className="flex h-[217px] w-full flex-col gap-2.5 px-1 py-1">
+      <Link href={href}>
+        <h3 className="font-inter text-2xl font-semibold leading-8">{title}</h3>
+        <p className="text-base text-[#666F85]">{subtitle}</p>
+        <time className="text-sm font-semibold text-[#A3A3A3]">{date}</time>
+      </Link>
       <div className="flex gap-2">
         {categories.map((category) => (
-          <span
+          <Link
             key={category}
-            className="rounded-2xl bg-[#EAEAEA] px-2.5 py-0.5 text-sm font-medium text-[#4D4D4D]"
+            href={`/tags/${encodeURIComponent(category.toLowerCase())}`}
+            className="rounded-2xl bg-[#EAEAEA] px-2.5 py-0.5 text-sm font-medium text-[#4D4D4D] hover:bg-gray-200"
           >
             {category}
-          </span>
+          </Link>
         ))}
       </div>
-    </Link>
+    </div>
   );
 };
 

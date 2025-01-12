@@ -10,6 +10,7 @@ interface SidebarProps {
 const navigationItems = [
   { name: "首页", href: "/" },
   { name: "文章", href: "/posts" },
+  { name: "标签", href: "/tags" },
   { name: "关于", href: "/about" },
 ]
 
