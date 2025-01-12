@@ -1,28 +1,31 @@
 "use client";
 
-import { getAllTags, getPostsByTag } from "@/lib/tags";
+import { getAllTags, getPostsByTags } from "@/lib/tags";
 import BlogCard from "@/app/components/BlogCard";
 import { useRouter, useSearchParams } from "next/navigation";
-import { allPosts } from "contentlayer/generated";
+import { useState } from "react";
 
 export default function TagsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const activeTag = searchParams.get("tag");
+  const initialTags = searchParams.get("tag")?.split(",") || [];
+  const [activeTags, setActiveTags] = useState<string[]>(initialTags);
 
   const tags = getAllTags().map((tag) => ({
     name: tag,
     value: tag,
   }));
 
-  const posts = activeTag ? getPostsByTag(activeTag) : allPosts;
+  const posts = getPostsByTags(activeTags);
 
   const handleTagClick = (value: string) => {
-    if (value === activeTag) {
-      router.push("/tags");
-    } else {
-      router.push(`/tags?tag=${value}`);
-    }
+    const newActiveTags = activeTags.includes(value)
+      ? activeTags.filter((tag) => tag !== value)
+      : [...activeTags, value];
+
+    setActiveTags(newActiveTags);
+    const query = newActiveTags.join(",");
+    router.push(query ? `/tags?tag=${query}` : "/tags");
   };
 
   return (
@@ -37,7 +40,7 @@ export default function TagsPage() {
               key={tag.name}
               onClick={() => handleTagClick(tag.value)}
               className={`rounded-2xl px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${
-                tag.value === activeTag
+                activeTags.includes(tag.value)
                   ? "bg-[#4D4D4D] text-white"
                   : "bg-[#EAEAEA] text-[#4D4D4D] hover:bg-gray-200"
               }`}
