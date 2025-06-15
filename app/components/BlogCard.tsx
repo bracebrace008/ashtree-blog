@@ -10,11 +10,13 @@ interface BlogCardProps {
 
 const BlogCard = ({ title, subtitle, date, tags, href }: BlogCardProps) => {
   return (
-    <div className="flex h-[217px] w-full flex-col gap-2.5 px-1 py-1">
+    <div className="flex w-full flex-col gap-2.5 px-1 py-1">
       <Link href={href}>
         <h3 className="font-inter text-2xl font-semibold leading-8">{title}</h3>
         <p className="text-base text-[#666F85] leading-8">{subtitle}</p>
-        <time className="text-sm font-semibold text-[#A3A3A3] leading-8">{date}</time>
+        <time className="text-sm font-semibold text-[#A3A3A3] leading-8">
+          {date}
+        </time>
       </Link>
       <div className="flex gap-2">
         {tags.map((tag) => (
