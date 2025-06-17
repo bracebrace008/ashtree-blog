@@ -21,8 +21,8 @@ Dart 是单线程语言，但它通过 **Isolate（隔离区）** 实现了“�
 **Isolate 的本质：**
 
 - 每个 Isolate 拥有自己的 **内存堆和事件循环**
-- 之间 **无法共享内存**
-- 通过 **消息机制（SendPort/ReceivePort）** 通信
+- Isolate之间 **无法共享内存**
+- Isolate之间通过 **消息机制（SendPort/ReceivePort）** 通信
 
 ### 与线程的区别
 
