@@ -1,0 +1,115 @@
+---
+title: React Fiber 架构详解：原理、调度与优势
+description: 深入浅出地介绍 React Fiber 架构的设计理念、核心原理、调度机制及其对现代前端开发的影响。
+date: 2024-03-21
+tags:
+  - React
+  - Fiber
+  - 前端
+---
+
+React Fiber 是 React 16 引入的全新协调引擎（Reconciler），它极大提升了 React 在复杂场景下的性能和可扩展性。本文将由浅入深地介绍 Fiber 的设计目标、核心原理、调度流程及其优势。
+
+## 一、为什么需要 Fiber？
+
+在 React 16 之前，React 使用递归方式进行虚拟 DOM 的 diff 和更新，这种方式有如下缺点：
+- 递归不可中断，长任务会阻塞主线程，导致页面卡顿
+- 难以实现优先级调度、动画等高级特性
+
+Fiber 架构的出现，正是为了解决这些问题。
+
+## 二、Fiber 的设计目标
+
+1. **可中断的渲染**：将渲染任务拆分为小单元，允许浏览器在合适时机中断和恢复
+2. **优先级调度**：支持不同任务的优先级，保证高优先级任务（如输入、动画）优先执行
+3. **更灵活的更新机制**：为未来的并发模式（Concurrent Mode）打下基础
+
+## 三、Fiber 的核心原理
+
+### 1. 什么是 Fiber？
+
+Fiber 是一个数据结构，表示虚拟 DOM 树中的一个节点。每个 Fiber 节点包含了当前组件的类型、属性、状态、子节点等信息。
+
+```js
+// Fiber 节点的简化结构
+const fiber = {
+  type,        // 组件类型
+  key,         // 唯一标识
+  stateNode,   // 真实 DOM 或类组件实例
+  child,       // 第一个子 Fiber
+  sibling,     // 下一个兄弟 Fiber
+  return,      // 父 Fiber
+  pendingProps,// 新的 props
+  memoizedProps,// 上一次的 props
+  memoizedState,// 上一次的 state
+  effectTag,   // 副作用类型
+  ...
+}
+```
+
+### 2. Fiber 树
+
+Fiber 节点组成了一棵 Fiber 树，结构与虚拟 DOM 树类似，但每个节点都可以独立调度和更新。
+
+## 四、Fiber 的调度流程
+
+Fiber 的调度分为两个阶段：
+
+### 1. Render（协调）阶段
+- 构建新的 Fiber 树（workInProgress）
+- 可以被中断、恢复
+- 计算出需要变更的内容（副作用）
+
+### 2. Commit（提交）阶段
+- 将变更应用到真实 DOM
+- 不能被中断
+
+```js
+// 简化的调度流程
+while (nextUnitOfWork) {
+  nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+}
+if (!nextUnitOfWork && workInProgressRoot) {
+  commitRoot();
+}
+```
+
+### 3. 优先级与时间分片
+
+Fiber 利用 requestIdleCallback 或 Scheduler 实现任务分片，允许高优先级任务打断低优先级任务。
+
+```js
+// 时间分片示意
+function workLoop(deadline) {
+  while (nextUnitOfWork && deadline.timeRemaining() > 1) {
+    nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+  }
+  if (nextUnitOfWork) {
+    requestIdleCallback(workLoop);
+  } else {
+    commitRoot();
+  }
+}
+requestIdleCallback(workLoop);
+```
+
+## 五、Fiber 的优势与影响
+
+1. **流畅的用户体验**：可中断渲染避免主线程长时间阻塞
+2. **支持并发特性**：为 Suspense、Concurrent Mode 等新特性提供基础
+3. **更强的可扩展性**：便于实现优先级、延迟加载等高级功能
+
+## 六、Fiber 的不足与挑战
+
+- Fiber 架构更复杂，调试难度提升
+- 需要开发者理解新的生命周期和调度机制
+
+## 七、可视化理解 Fiber
+
+可以通过 React DevTools 或社区可视化工具观察 Fiber 树的结构和调度过程。
+
+## 八、参考资料
+
+1. [React 官方文档：Fiber 架构](https://react.dev/learn/react-fiber-architecture)
+2. [深入理解 React Fiber](https://juejin.cn/post/6844903929705136141)
+3. [React 源码解析：Fiber](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiber.js) 
