@@ -10,32 +10,32 @@ tags:
 
 Git 是目前最流行的分布式版本控制系统，被广泛应用于开源和企业项目。本文将详细介绍 Git 的基本原理、常用命令、分支管理、团队协作流程及实用技巧，帮助你高效掌控代码版本。
 
-## 一、Git 的核心原理
+## Git 的核心原理
 
-### 1. 分布式版本控制
+### 分布式版本控制
 - 每个开发者本地都有完整的代码仓库和历史记录
 - 支持离线操作，安全性高
 
-### 2. 快照存储（Snapshot）
+### 快照存储（Snapshot）
 - Git 以快照方式记录每次提交（commit），而不是简单的文件差异
 - 每个快照都有唯一的 SHA-1 哈希值
 
-### 3. 数据结构
+### 数据结构
 - 工作区（Working Directory）：当前编辑的文件
 - 暂存区（Stage/Index）：准备提交的更改
 - 本地仓库（Repository）：已提交的历史记录
 - 远程仓库（Remote）：如 GitHub、Gitee 等
 
-## 二、Git 常用命令
+## Git 常用命令
 
-### 1. 仓库初始化与配置
+### 仓库初始化与配置
 ```bash
 git init                # 初始化本地仓库
 git config --global user.name "你的名字"
 git config --global user.email "你的邮箱"
 ```
 
-### 2. 基本操作
+### 基本操作
 ```bash
 git status              # 查看当前状态
 git add .               # 添加所有更改到暂存区
@@ -46,7 +46,7 @@ git rm <file>           # 删除文件
 git mv <old> <new>      # 重命名文件
 ```
 
-### 3. 远程操作
+### 远程操作
 ```bash
 git remote add origin <url> # 添加远程仓库
 git push -u origin master   # 推送到远程仓库
@@ -54,9 +54,9 @@ git pull                   # 拉取远程更改
 git clone <url>            # 克隆远程仓库
 ```
 
-## 三、分支管理与合并
+## 分支管理与合并
 
-### 1. 分支操作
+### 分支操作
 ```bash
 git branch                 # 查看分支
 git branch <name>          # 创建新分支
@@ -66,7 +66,7 @@ git merge <name>           # 合并分支
 git branch -d <name>       # 删除分支
 ```
 
-### 2. 分支实战示例
+### 分支实战示例
 ```bash
 git checkout -b feature/login   # 新建功能分支
 # ...开发并提交代码...
@@ -75,7 +75,7 @@ git merge feature/login         # 合并功能分支
 git branch -d feature/login     # 删除已合并分支
 ```
 
-## 四、团队协作流程
+## 团队协作流程
 
 1. Fork 项目到自己的仓库
 2. 克隆到本地开发
@@ -84,9 +84,9 @@ git branch -d feature/login     # 删除已合并分支
 5. 发起 Pull Request（PR）
 6. 代码评审与合并
 
-## 五、实用技巧
+## 实用技巧
 
-### 1. 撤销与回退
+### 撤销与回退
 ```bash
 git checkout -- <file>          # 撤销工作区更改
 git reset HEAD <file>           # 撤销暂存区更改
@@ -94,28 +94,28 @@ git revert <commit>             # 生成新提交，撤销指定提交
 git reset --hard <commit>       # 强制回退到指定提交（慎用）
 ```
 
-### 2. 查看与恢复历史版本
+### 查看与恢复历史版本
 ```bash
 git log --oneline --graph       # 图形化查看提交历史
 git show <commit>               # 查看某次提交详情
 git checkout <commit> <file>    # 恢复某次提交的文件
 ```
 
-### 3. 忽略文件
+### 忽略文件
 - 在 `.gitignore` 文件中添加不需要纳入版本控制的文件或目录
 
-### 4. 配置别名
+### 配置别名
 ```bash
 git config --global alias.co checkout
 ```
 
-## 六、常见问题与解决方案
+## 常见问题与解决方案
 
 - **合并冲突**：手动编辑冲突文件，解决后 `git add` 并继续合并
 - **误删分支/提交**：可通过 `git reflog` 找回历史记录
 - **推送失败**：先 `git pull --rebase`，解决冲突后再推送
 
-## 七、参考资料
+## 参考资料
 
 1. [Pro Git 电子书](https://git-scm.com/book/zh/v2)
 2. [Git 官方文档](https://git-scm.com/doc)
